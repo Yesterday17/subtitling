@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+        <title>ASS 标签</title>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        
+    </head>
+    <body>
+        <h1 id="ass-%e6%a0%87%e7%ad%be">ASS 标签</h1>
+<ul>
+<li><a href="#ass-%e6%a0%87%e7%ad%be">ASS 标签</a>
+<ul>
+<li><a href="#%e7%ae%80%e4%bb%8b">简介</a></li>
+<li><a href="#%e7%89%b9%e6%ae%8a%e7%ac%a6%e5%8f%b7">特殊符号</a></li>
+<li><a href="#%e7%89%b9%e6%95%88%e6%a0%87%e7%ad%be%e6%a0%bc%e5%bc%8f">特效标签：格式</a></li>
+<li><a href="#%e7%89%b9%e6%95%88%e6%a0%87%e7%ad%be%e6%95%b4%e8%a1%8c">特效标签：整行</a>
+<ul>
+<li><a href="#pos-%e8%ae%be%e7%bd%ae%e4%bd%8d%e7%bd%ae"><code>pos</code> (设置位置)</a></li>
+<li><a href="#move-%e7%a7%bb%e5%8a%a8%e4%bd%8d%e7%bd%ae"><code>move</code> (移动位置)</a></li>
+<li><a href="#org-%e8%ae%be%e7%bd%ae%e6%97%8b%e8%bd%ac%e4%b8%ad%e5%bf%83"><code>org</code> (设置旋转中心)</a></li>
+<li><a href="#fad-%e7%ae%80%e5%8d%95%e6%b7%a1%e5%85%a5%e6%b7%a1%e5%87%ba"><code>fad</code> (简单淡入淡出)</a></li>
+<li><a href="#fade-%e5%a4%8d%e6%9d%82%e6%b7%a1%e5%85%a5%e6%b7%a1%e5%87%ba"><code>fade</code> (复杂淡入淡出)</a></li>
+<li><a href="#clip-iclip-%e9%81%ae%e7%bd%a9"><code>clip</code>, <code>iclip</code> (遮罩)</a></li>
+</ul>
+</li>
+<li><a href="#%e7%89%b9%e6%95%88%e6%a0%87%e7%ad%be%e6%a0%87%e7%ad%be%e5%90%8e">特效标签：标签后</a>
+<ul>
+<li><a href="#i-%e6%96%9c%e4%bd%93"><code>i</code> (斜体)</a></li>
+<li><a href="#b-%e7%b2%97%e4%bd%93"><code>b</code> (粗体)</a></li>
+<li><a href="#u-%e4%b8%8b%e5%88%92%e7%ba%bf"><code>u</code> (下划线)</a></li>
+<li><a href="#s-%e5%88%a0%e9%99%a4%e7%ba%bf"><code>s</code> (删除线)</a></li>
+<li><a href="#bord-%e8%be%b9%e6%a1%86"><code>bord</code> (边框)</a></li>
+<li><a href="#shad-%e9%98%b4%e5%bd%b1"><code>shad</code> (阴影)</a></li>
+<li><a href="#be-%e8%be%b9%e6%a1%86%e6%a8%a1%e7%b3%8a"><code>be</code> (边框模糊)</a></li>
+<li><a href="#blur-%e8%be%b9%e7%bc%98%e6%a8%a1%e7%b3%8a%e9%ab%98%e6%96%af%e5%87%bd%e6%95%b0"><code>blur</code> (边缘模糊[高斯函数])</a></li>
+<li><a href="#fn-%e5%ad%97%e4%bd%93%e5%90%8d%e7%a7%b0"><code>fn</code> (字体名称)</a></li>
+<li><a href="#fs-%e5%ad%97%e4%bd%93%e5%a4%a7%e5%b0%8f"><code>fs</code> (字体大小)</a></li>
+<li><a href="#fscx-fscy-%e5%ad%97%e4%bd%93%e7%bc%a9%e6%94%be"><code>fscx</code>, <code>fscy</code> (字体缩放)</a></li>
+<li><a href="#fsp-%e5%ad%97%e7%ac%a6%e9%97%b4%e8%b7%9d"><code>fsp</code> (字符间距)</a></li>
+<li><a href="#frx-fry-frz-fr-%e6%97%8b%e8%bd%ac%e6%96%87%e6%9c%ac"><code>frx</code>, <code>fry</code>, <code>frz</code>, <code>fr</code> (旋转文本)</a></li>
+<li><a href="#fax-fay-%e5%89%aa%e5%88%87%e5%8f%98%e6%8d%a2"><code>fax</code>, <code>fay</code> (剪切变换)</a></li>
+<li><a href="#fe-%e5%ad%97%e7%ac%a6%e9%9b%86"><code>fe</code> (字符集)</a></li>
+<li><a href="#c-1c-2c-3c-4c-%e6%96%87%e6%9c%ac%e9%a2%9c%e8%89%b2"><code>c</code>, <code>1c</code>, <code>2c</code>, <code>3c</code>, <code>4c</code> (文本颜色)</a></li>
+<li><a href="#alpha-1a-2a-3a-4a-%e9%80%8f%e6%98%8e%e5%ba%a6"><code>alpha</code>, <code>1a</code>, <code>2a</code>, <code>3a</code>, <code>4a</code> (透明度)</a></li>
+<li><a href="#an-%e8%a1%8c%e5%af%b9%e9%bd%90"><code>an</code> (行对齐)</a></li>
+<li><a href="#k-k-kf-ko-%e5%8d%a1%e6%8b%89-ok-%e6%95%88%e6%9e%9c"><code>k</code>, <code>K</code>, <code>kf</code>, <code>ko</code> (卡拉 OK 效果)</a></li>
+<li><a href="#q-%e6%8d%a2%e8%a1%8c%e9%a3%8e%e6%a0%bc"><code>q</code> (换行风格)</a></li>
+<li><a href="#r-%e9%87%8d%e7%bd%ae%e6%a0%b7%e5%bc%8f"><code>r</code> (重置样式)</a></li>
+<li><a href="#t-%e6%b8%90%e5%8f%98"><code>t</code> (渐变)</a></li>
+</ul>
+</li>
+<li><a href="#%e7%bb%98%e7%94%bb%e6%a0%87%e7%ad%be">绘画标签</a>
+<ul>
+<li><a href="#p-%e7%bb%98%e5%88%b6%e6%a8%a1%e5%bc%8f%e5%88%86%e8%be%a8%e7%8e%87%e5%80%8d%e6%95%b0"><code>p</code> (绘制模式/分辨率倍数)</a></li>
+<li><a href="#pbo-%e5%9f%ba%e7%ba%bf%e5%81%8f%e7%a7%bb"><code>pbo</code> (基线偏移)</a></li>
+</ul>
+</li>
+<li><a href="#%e7%bb%98%e7%94%bb%e6%8c%87%e4%bb%a4">绘画指令</a>
+<ul>
+<li><a href="#m-%e9%97%ad%e5%90%88%e7%a7%bb%e5%8a%a8%e5%85%89%e6%a0%87"><code>m</code> (闭合移动光标)</a></li>
+<li><a href="#n-%e9%9d%9e%e9%97%ad%e5%90%88%e7%a7%bb%e5%8a%a8%e5%85%89%e6%a0%87"><code>n</code> (非闭合移动光标)</a></li>
+<li><a href="#line-%e7%9b%b4%e7%ba%bf"><code>Line</code> (直线)</a></li>
+<li><a href="#b-%e4%b8%89%e9%98%b6%e8%b4%9d%e5%a1%9e%e5%b0%94%e6%9b%b2%e7%ba%bf"><code>b</code> (三阶贝塞尔曲线)</a></li>
+<li><a href="#s-%e4%b8%89%e6%ac%a1-b-%e7%ba%bf%e6%9d%a1"><code>s</code> (三次 B 线条)</a></li>
+<li><a href="#p-%e6%89%a9%e5%b1%95-b-%e7%ba%bf%e6%9d%a1"><code>p</code> (扩展 B 线条)</a></li>
+<li><a href="#c-%e9%97%ad%e5%90%88-b-%e7%ba%bf%e6%9d%a1"><code>c</code> (闭合 B 线条)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="%e7%ae%80%e4%bb%8b">简介</h2>
+<p>本文精简自 <a href="https://aegi.vmoe.info/docs/3.1/ASS_Tags/">ASS标签</a> 页面，删去了所有的例子和原英文文本，并进行了格式化表示，旨在方便查阅。</p>
+<p>阅读之前你需要能了解 <code>TypeScript</code> 的类型标记方式。</p>
+<p>目录由 Markdown All In One 生成。</p>
+<h2 id="%e7%89%b9%e6%ae%8a%e7%ac%a6%e5%8f%b7">特殊符号</h2>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>内容</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>软换行/软空格</td>
+<td><code>\n</code></td>
+<td>插入一个强制换行符，只在换行方式 2 下生效。</td>
+</tr>
+<tr>
+<td>硬换行</td>
+<td><code>\N</code></td>
+<td>插入一个强制换行符，在所有换行方式下都生效。</td>
+</tr>
+<tr>
+<td>硬空格</td>
+<td><code>\h</code></td>
+<td>插入一个不换行的<strong>硬</strong>空格。句子将不会在硬空格处自动换行，并且当硬空格出现在一行的开头或者结束的地方，也不会被忽略（Aegisub 排版引擎一般会忽略换行处的空格）。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="%e7%89%b9%e6%95%88%e6%a0%87%e7%ad%be%e6%a0%bc%e5%bc%8f">特效标签：格式</h2>
+<p>特效标签需要包裹在 <code>{}</code> 内，以 <code>\</code> 开头。</p>
+<p>此处对下文描述的一些数据类型作简单说明：</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>数据类型</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>int</td>
+<td>整数</td>
+</tr>
+<tr>
+<td>02</td>
+<td>number</td>
+<td>实数</td>
+</tr>
+<tr>
+<td>03</td>
+<td>boolean</td>
+<td>布尔，实际书写时须使用 <code>0</code> / <code>1</code></td>
+</tr>
+<tr>
+<td>04</td>
+<td>string</td>
+<td>字符串</td>
+</tr>
+<tr>
+<td>05</td>
+<td>Time</td>
+<td>时间，表示形式为整数，单位<strong>毫秒</strong></td>
+</tr>
+<tr>
+<td>06</td>
+<td>Color</td>
+<td>颜色，实际书写时的表示格式：<code>&amp;HBBGGRR&amp;</code></td>
+</tr>
+<tr>
+<td>07</td>
+<td>Alpha</td>
+<td>透明度，实际书写时的表示格式：<code>&amp;HAA</code>，<code>00</code> 代表不透明。</td>
+</tr>
+<tr>
+<td>08</td>
+<td>Position</td>
+<td>位置，实际书写时用整数 <code>1-9</code>，对应小键盘上的位置</td>
+</tr>
+<tr>
+<td>09</td>
+<td>DrawingCommands</td>
+<td><a href="#%e7%bb%98%e7%94%bb%e6%8c%87%e4%bb%a4">绘画指令</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="%e7%89%b9%e6%95%88%e6%a0%87%e7%ad%be%e6%95%b4%e8%a1%8c">特效标签：整行</h2>
+<p>这一类特效标签会对整行字幕生效。</p>
+<h3 id="pos-%e8%ae%be%e7%bd%ae%e4%bd%8d%e7%bd%ae"><code>pos</code> (设置位置)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f">格式</h4>
+<pre><code class="language-ts"><div>pos(x: int, y: int)
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e">说明</h4>
+<p>设置一行字幕的<strong>位置</strong>。与行对齐有关。</p>
+<h3 id="move-%e7%a7%bb%e5%8a%a8%e4%bd%8d%e7%bd%ae"><code>move</code> (移动位置)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-1">格式</h4>
+<pre><code class="language-ts"><div>move(x1: int, y1: int, x2: int, y2: int, t1?: Time = <span class="hljs-number">0</span>, t2?: Time = <span class="hljs-number">0</span>)
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-1">说明</h4>
+<p>让一行字幕<strong>移动</strong>。当 <code>t1</code>，<code>t2</code> 未定义时，移动时间即为字幕时间。它也会设置字幕的位置。<br>
+<code>t1</code>，<code>t2</code> 相对字幕开始时间计算。</p>
+<h4 id="%e5%b1%80%e9%99%90%e6%80%a7">局限性</h4>
+<ul>
+<li>只能匀速移动</li>
+<li>一行中只能够存在一个 <code>move</code> 或 <code>pos</code></li>
+</ul>
+<blockquote>
+<p>如果你需要这两种效果。那么你得把字幕分成几行，然后分别设定移动效果，让它们衔接起来。这就不是本文要涉及的内容了。</p>
+</blockquote>
+<h3 id="org-%e8%ae%be%e7%bd%ae%e6%97%8b%e8%bd%ac%e4%b8%ad%e5%bf%83"><code>org</code> (设置旋转中心)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-2">格式</h4>
+<pre><code class="language-ts"><div>org(x: int, y: int)
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-2">说明</h4>
+<p>设定一行字幕的<strong>旋转中心</strong>。</p>
+<p>旋转中心默认为位置设定的参考点，其会随着动画移动；但如果设置了 <a href="#org-%e8%ae%be%e7%bd%ae%e6%97%8b%e8%bd%ac%e4%b8%ad%e5%bf%83">org</a>，则旋转中心固定。</p>
+<blockquote>
+<p>如果你将旋转中心放在 3D 场景中的消失点处，字幕行的 3D 旋转会有正确的和场景相匹配的透视效果。<br>
+把旋转中心放在画面外面是完全可行（有些时候也很有用）的。如果旋转中心足够的远，那么就可以计算出合适的小转动角，让文本看起来是沿直线（或者近似直线）在屏幕上移动。这有些难以掌控，但是可以用来绕过 <code>move</code> 的格式限制，比如无法加速移动，无法在每条线上进行几个移动。</p>
+</blockquote>
+<p>每行字幕只有第一个 <code>org</code> 生效。</p>
+<h3 id="fad-%e7%ae%80%e5%8d%95%e6%b7%a1%e5%85%a5%e6%b7%a1%e5%87%ba"><code>fad</code> (简单淡入淡出)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-3">格式</h4>
+<pre><code class="language-ts"><div>fad(fadein: Time, fadeout: Time)
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-3">说明</h4>
+<p>设定一行字幕的<strong>简单淡入淡出效果</strong>。将某一参数设置为 <code>0</code> 时不产生参数对应效果。</p>
+<h3 id="fade-%e5%a4%8d%e6%9d%82%e6%b7%a1%e5%85%a5%e6%b7%a1%e5%87%ba"><code>fade</code> (复杂淡入淡出)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-4">格式</h4>
+<pre><code class="language-ts"><div>fade(a1: Alpha, a2: Alpha, a3: Alpha, t1: Time, t2: Time, t3: Time, t4: Time)
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-4">说明</h4>
+<p>设定一行字幕的<strong>复杂淡入淡出效果</strong>。效果如下所示：</p>
+<pre><code><div>透明度       a1     a1-&gt;a2          a2          a2-&gt;a3     a3
+时间轴    |------|----------|----------------|----------|------&gt; 时间(t)
+时间点    0     _t1        _t2              _t3        _t4
+</div></code></pre>
+<h3 id="clip-iclip-%e9%81%ae%e7%bd%a9"><code>clip</code>, <code>iclip</code> (遮罩)</h3>
+<p>设置一个遮罩。遮罩中坐标按<strong>脚本分辨率</strong>计算，以视频左上角为原点。遮罩有如下两种类型：</p>
+<h4 id="%e6%96%b9%e5%bd%a2">方形</h4>
+<h5 id="%e6%a0%bc%e5%bc%8f-5">格式</h5>
+<pre><code class="language-ts"><div>clip(x1: int, y1: int, x2: int, y2: int)
+iclip(x1: int, y1: int, x2: int, y2: int)
+</div></code></pre>
+<h5 id="%e8%af%b4%e6%98%8e-5">说明</h5>
+<p><code>clip</code> 确定一个方形区域，只有<strong>区域内</strong>的字幕是可见的。<br>
+<code>iclip</code> 则相反，只有<strong>区域外</strong>的字幕是可见的。</p>
+<h4 id="%e7%9f%a2%e9%87%8f%e7%bb%98%e5%9b%be">矢量绘图</h4>
+<h5 id="%e6%a0%bc%e5%bc%8f-6">格式</h5>
+<pre><code class="language-ts"><div>clip(scale?: <span class="hljs-built_in">number</span> = <span class="hljs-number">1</span>, commands: DrawingCommands)
+iclip(scale?: <span class="hljs-built_in">number</span> = <span class="hljs-number">1</span>, commands: DrawingCommands)
+</div></code></pre>
+<h5 id="%e8%af%b4%e6%98%8e-6">说明</h5>
+<p>用矢量绘图画一个遮罩区域来选择显示(<code>clip</code>)或不显示(<code>iclip</code>)字幕的一部份。<br>
+<code>DrawingCommands</code> 是和 <code>p</code> 一起使用的<a href="#%E7%BB%98%E7%94%BB%E6%8C%87%E4%BB%A4">绘画指令</a>；<code>scale</code> 作用和 <a href="#p">p</a> 中相同。</p>
+<!-- TODO -->
+<blockquote>
+<p>不同于方形的遮罩，矢量绘图遮罩无法被 <code>t</code> 动画化。如果你想要这种效果，你需要把一行字幕切成许多行，然后设定每一行在这个动画过程中的遮罩区域。</p>
+</blockquote>
+<h2 id="%e7%89%b9%e6%95%88%e6%a0%87%e7%ad%be%e6%a0%87%e7%ad%be%e5%90%8e">特效标签：标签后</h2>
+<h3 id="i-%e6%96%9c%e4%bd%93"><code>i</code> (斜体)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-7">格式</h4>
+<pre><code class="language-ts"><div>i(enable: <span class="hljs-built_in">boolean</span>)
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-7">说明</h4>
+<p>应用/取消<em>斜体</em>。</p>
+<h3 id="b-%e7%b2%97%e4%bd%93"><code>b</code> (粗体)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-8">格式</h4>
+<pre><code class="language-ts"><div>b(enable: <span class="hljs-built_in">boolean</span>)
+b(weight: int &gt; <span class="hljs-number">1</span>)
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-8">说明</h4>
+<p>应用/取消<strong>粗体</strong>; 设置粗体的字重（大部分字体不支持字重）。</p>
+<h3 id="u-%e4%b8%8b%e5%88%92%e7%ba%bf"><code>u</code> (下划线)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-9">格式</h4>
+<pre><code class="language-ts"><div>u(enable: <span class="hljs-built_in">boolean</span>)
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-9">说明</h4>
+<p>应用/取消<u>下划线</u>。</p>
+<h3 id="s-%e5%88%a0%e9%99%a4%e7%ba%bf"><code>s</code> (删除线)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-10">格式</h4>
+<pre><code class="language-ts"><div>s(enable: <span class="hljs-built_in">boolean</span>)
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-10">说明</h4>
+<p>应用/取消<s>删除线</s>。</p>
+<h3 id="bord-%e8%be%b9%e6%a1%86"><code>bord</code> (边框)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-11">格式</h4>
+<pre><code class="language-ts"><div>bord(size: <span class="hljs-built_in">number</span> &gt;= <span class="hljs-number">0</span>)
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-11">说明</h4>
+<p>改变字符边框的宽度。</p>
+<blockquote>
+<p>如果“比例缩放边框和阴影”是选中的，边框宽度值将取决于脚本的分辨率，否则会由视频的分辨率决定（也就是说边框的宽度会自适应使用该字幕的视频）。</p>
+</blockquote>
+<h4 id="xbord-ybord"><code>xbord</code>, <code>ybord</code></h4>
+<p>改变单坐标轴上的边框宽度。</p>
+<h3 id="shad-%e9%98%b4%e5%bd%b1"><code>shad</code> (阴影)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-12">格式</h4>
+<pre><code class="language-ts"><div>shad(depth : <span class="hljs-built_in">number</span> &gt;= <span class="hljs-number">0</span>)
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-12">说明</h4>
+<p>设置字符与阴影间的距离。设置深度为 <code>0</code> 使阴影完全消失。其他方面和边框宽度 <code>bord</code> 的设置相似。</p>
+<h4 id="xshad-yshad"><code>xshad</code>, <code>yshad</code></h4>
+<p>改变单坐标轴方向上阴影与字符的距离。此处 <code>depth</code> 可小于 <code>0</code>，以显示在反方向。</p>
+<h3 id="be-%e8%be%b9%e6%a1%86%e6%a8%a1%e7%b3%8a"><code>be</code> (边框模糊)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-13">格式</h4>
+<pre><code class="language-ts"><div>be(enable: <span class="hljs-built_in">boolean</span>)
+be(strength: int)
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-13">说明</h4>
+<p>应用/取消<strong>边框模糊</strong>; 设置边框模糊循环叠加效果的次数。</p>
+<p>效果通常在字符比较小的情况下更明显，有些时候会让字符看起来更舒服。<br>
+当文本有<strong>边框</strong>时，只会模糊边框；反之会模糊文本主体。<br>
+对于高强度模糊，<code>blur</code> 通常结果更有用。</p>
+<h3 id="blur-%e8%be%b9%e7%bc%98%e6%a8%a1%e7%b3%8a%e9%ab%98%e6%96%af%e5%87%bd%e6%95%b0"><code>blur</code> (边缘模糊[高斯函数])</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-14">格式</h4>
+<pre><code class="language-ts"><div>blur(strength: <span class="hljs-built_in">number</span> &gt;= <span class="hljs-number">0</span>)
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-14">说明</h4>
+<p>设置<strong>边缘模糊 (高斯函数)</strong>。</p>
+<blockquote>
+<p>把 <code>strength</code> 设置的太高的话，渲染时会占用大量 <code>CPU</code> 时间。</p>
+</blockquote>
+<h3 id="fn-%e5%ad%97%e4%bd%93%e5%90%8d%e7%a7%b0"><code>fn</code> (字体名称)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-15">格式</h4>
+<pre><code class="language-ts"><div>fn(fontname: <span class="hljs-built_in">string</span>)
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-15">说明</h4>
+<p>设置<strong>字体名称</strong>。</p>
+<h3 id="fs-%e5%ad%97%e4%bd%93%e5%a4%a7%e5%b0%8f"><code>fs</code> (字体大小)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-16">格式</h4>
+<pre><code class="language-ts"><div>fs(fontsize: int &gt; <span class="hljs-number">0</span>)
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-16">说明</h4>
+<p>设置<strong>字体大小</strong>。</p>
+<h3 id="fscx-fscy-%e5%ad%97%e4%bd%93%e7%bc%a9%e6%94%be"><code>fscx</code>, <code>fscy</code> (字体缩放)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-17">格式</h4>
+<pre><code class="language-ts"><div>fscx(scale: <span class="hljs-built_in">number</span> &gt; <span class="hljs-number">0</span>)
+fscy(scale: <span class="hljs-built_in">number</span> &gt; <span class="hljs-number">0</span>)
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-17">说明</h4>
+<p>设置字体在各坐标轴上的缩放。<code>100</code> 为原大小。这两个标签也会影响矢量绘图。</p>
+<blockquote>
+<p>字体变形可以用来修正错误的渲染，也可以比 <a href="#fs-%e5%ad%97%e4%bd%93%e5%a4%a7%e5%b0%8f">fs</a> 更准确的指定字体大小。</p>
+</blockquote>
+<h3 id="fsp-%e5%ad%97%e7%ac%a6%e9%97%b4%e8%b7%9d"><code>fsp</code> (字符间距)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-18">格式</h4>
+<pre><code class="language-ts"><div>fsp(spacing: <span class="hljs-built_in">number</span>)
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-18">说明</h4>
+<p>设置<strong>字符间距</strong>，<code>spacing</code> 会按脚本分辨率计算。</p>
+<h3 id="frx-fry-frz-fr-%e6%97%8b%e8%bd%ac%e6%96%87%e6%9c%ac"><code>frx</code>, <code>fry</code>, <code>frz</code>, <code>fr</code> (旋转文本)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-19">格式</h4>
+<pre><code class="language-ts"><div>frx(amount: <span class="hljs-built_in">number</span>)
+fry(amount: <span class="hljs-built_in">number</span>)
+frz(amount: <span class="hljs-built_in">number</span>)
+
+fr(amount: <span class="hljs-built_in">number</span>)
+</div></code></pre>
+<pre><code class="language-bash"><div><span class="hljs-built_in">alias</span> fr=frz
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-19">说明</h4>
+<p>按坐标轴<strong>旋转文本</strong>。</p>
+<pre><code><div>                y
+                |
+                |
+                |
+     x —— —— —— ·
+               /
+              /
+             /
+            z
+</div></code></pre>
+<p>当 <code>amount &gt; 0</code> 时，文本旋转的方向为：大拇指指向坐标轴方向时四指旋转的方向。</p>
+<p>文本的锚点为当前字幕行的原点，由 <a href="#org-%e8%ae%be%e7%bd%ae%e6%97%8b%e8%bd%ac%e4%b8%ad%e5%bf%83">org</a> 规定</p>
+<h3 id="fax-fay-%e5%89%aa%e5%88%87%e5%8f%98%e6%8d%a2"><code>fax</code>, <code>fay</code> (剪切变换)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-20">格式</h4>
+<pre><code class="language-ts"><div>fax(factor: <span class="hljs-built_in">number</span>)
+fay(factor: <span class="hljs-built_in">number</span>)
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-20">说明</h4>
+<p>对文本应用一个<strong>剪切变换</strong>。<code>factor</code> 为 <code>0</code> 即意味着不做变换。<br>
+通常 <code>factor ∈ [-2, 2]</code>，否则效果一般都不是很好。</p>
+<p>剪切是在旋转之后应用的，以旋转后的坐标系为基准。这个剪切用的坐标系不受旋转中心的影响。</p>
+<h3 id="fe-%e5%ad%97%e7%ac%a6%e9%9b%86"><code>fe</code> (字符集)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-21">格式</h4>
+<pre><code class="language-ts"><div>fe(id: int &gt;= <span class="hljs-number">0</span>)
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-21">说明</h4>
+<p>设置<strong>字体字符集</strong>。</p>
+<p>一些常用的字体字符集 <code>ID</code>：</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0</code></td>
+<td>ANSI</td>
+<td>Windows CP-1252，西欧语言</td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>默认</td>
+<td>视用户操作系统的配置而定，但也允许字体子系统视情况选择一个不同的字符映射表</td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td>符号</td>
+<td>码位的取值范围是 <code>[0, 255]</code>，显示效果视具体字体而定，像 Wingdings 这样的装饰字体应该用这个 <code>ID</code></td>
+</tr>
+<tr>
+<td><code>128</code></td>
+<td>Shift-JIS</td>
+<td>日语</td>
+</tr>
+<tr>
+<td><code>129</code></td>
+<td>Hangeul</td>
+<td>韩语的一个字符集</td>
+</tr>
+<tr>
+<td><code>130</code></td>
+<td>Johab</td>
+<td>韩语的一个字符集</td>
+</tr>
+<tr>
+<td><code>134</code></td>
+<td>GB2312</td>
+<td>简体中文</td>
+</tr>
+<tr>
+<td><code>136</code></td>
+<td>BIG5</td>
+<td>繁体中文</td>
+</tr>
+<tr>
+<td><code>162</code></td>
+<td></td>
+<td>土耳其语</td>
+</tr>
+<tr>
+<td><code>163</code></td>
+<td></td>
+<td>越南语</td>
+</tr>
+<tr>
+<td><code>177</code></td>
+<td></td>
+<td>希伯来语</td>
+</tr>
+<tr>
+<td><code>178</code></td>
+<td></td>
+<td>阿拉伯语</td>
+</tr>
+</tbody>
+</table>
+<h3 id="c-1c-2c-3c-4c-%e6%96%87%e6%9c%ac%e9%a2%9c%e8%89%b2"><code>c</code>, <code>1c</code>, <code>2c</code>, <code>3c</code>, <code>4c</code> (文本颜色)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-22">格式</h4>
+<pre><code class="language-ts"><div>c(color: Color)
+<span class="hljs-number">1</span>c(color: Color)
+<span class="hljs-number">2</span>c(color: Color)
+<span class="hljs-number">3</span>c(color: Color)
+<span class="hljs-number">4</span>c(color: Color)
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-22">说明</h4>
+<p>设置<strong>文本颜色</strong>。</p>
+<ul>
+<li><code>1c</code> 设置主要填充颜色。</li>
+<li><code>2c</code> 设置次要填充颜色。这个仅会在标准卡拉 OK 的预填充时使用。</li>
+<li><code>3c</code> 设置边框颜色。</li>
+<li><code>4c</code> 设置阴影颜色。</li>
+<li><code>c</code> 设置以上四种。</li>
+</ul>
+<blockquote>
+<p>TODO: #RRGGBB -&gt; &amp;HBBGGRR&amp; 自动转换</p>
+</blockquote>
+<h3 id="alpha-1a-2a-3a-4a-%e9%80%8f%e6%98%8e%e5%ba%a6"><code>alpha</code>, <code>1a</code>, <code>2a</code>, <code>3a</code>, <code>4a</code> (透明度)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-23">格式</h4>
+<pre><code class="language-ts"><div>alpha(alpha: Alpha)
+<span class="hljs-number">1</span>a(alpha: Alpha)
+<span class="hljs-number">2</span>a(alpha: Alpha)
+<span class="hljs-number">3</span>a(alpha: Alpha)
+<span class="hljs-number">4</span>a(alpha: Alpha)
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-23">说明</h4>
+<p>设置<strong>文本透明度</strong>。</p>
+<ul>
+<li><code>1a</code> 设置主要填充透明度。</li>
+<li><code>2a</code> 设置次要填充透明度。这个仅会在标准卡拉 OK 的预填充时使用。</li>
+<li><code>3a</code> 设置边框透明度。</li>
+<li><code>4a</code> 设置阴影透明度。</li>
+<li><code>alpha</code> 设置以上四种。</li>
+</ul>
+<h3 id="an-%e8%a1%8c%e5%af%b9%e9%bd%90"><code>an</code> (行对齐)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-24">格式</h4>
+<pre><code class="language-ts"><div>an(pos: Position)
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-24">说明</h4>
+<p>设置文本的<strong>行对齐方式</strong>，<code>Position</code> 的位置与小键盘对应。</p>
+<h3 id="k-k-kf-ko-%e5%8d%a1%e6%8b%89-ok-%e6%95%88%e6%9e%9c"><code>k</code>, <code>K</code>, <code>kf</code>, <code>ko</code> (卡拉 OK 效果)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-25">格式</h4>
+<pre><code class="language-ts"><div>k(duration: int &gt; <span class="hljs-number">0</span>)
+kf(duration: int &gt; <span class="hljs-number">0</span>)
+ko(duration: int &gt; <span class="hljs-number">0</span>)
+
+K(duration: int &gt; <span class="hljs-number">0</span>)
+</div></code></pre>
+<pre><code class="language-bash"><div><span class="hljs-built_in">alias</span> K=kf
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-25">说明</h4>
+<p>卡拉 OK 效果。该标签通常不手动创建。</p>
+<ul>
+<li><code>k</code>: 在这个音节开始之前，使用<em>次要填充颜色</em>和透明度。当这个音节<strong>开始时</strong>，立即变为使用<strong>主要填充颜色</strong>和透明度。</li>
+<li><code>kf</code>: 在音节开始之前，使用<em>次要填充颜色</em>和透明度。当音节开始时，文本<strong>从左到右</strong>由次要填充颜色和透明度变为主要填充颜色和透明度，这个过程在音节结束时刚好结束。</li>
+<li><code>ko</code>: 和 <code>kf</code> 类似，但是在音节开始之前，字符的<strong>边框会被移除</strong>。当音节开始时会立即出现。</li>
+</ul>
+<h3 id="q-%e6%8d%a2%e8%a1%8c%e9%a3%8e%e6%a0%bc"><code>q</code> (换行风格)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-26">格式</h4>
+<pre><code class="language-ts"><div>q(style: int ∈ [<span class="hljs-number">0</span>, <span class="hljs-number">3</span>])
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-26">说明</h4>
+<p>设置<strong>换行风格</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>换行风格</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>智能断行，尽可能让所有的行等长，不可能等长时选择让顶端的行宽一些。只有遇到 <code>\N</code> 会强制换行。</td>
+</tr>
+<tr>
+<td>1</td>
+<td>行尾换行，尽可能填满一行，然后换行。只有遇到 <code>\N</code> 会强制换行。</td>
+</tr>
+<tr>
+<td>2</td>
+<td>不换行，多余的字符会超过屏幕边缘。遇到 <code>\n</code> 和 <code>\N</code> 都会强制换行。</td>
+</tr>
+<tr>
+<td>3</td>
+<td>智能换行，与智能断行相似，但是会选择让靠近底部的行更宽。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="r-%e9%87%8d%e7%bd%ae%e6%a0%b7%e5%bc%8f"><code>r</code> (重置样式)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-27">格式</h4>
+<pre><code class="language-ts"><div>r(style?: <span class="hljs-built_in">string</span>)
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-27">说明</h4>
+<p><strong>重置</strong>其后文本的<strong>样式</strong>，会让一切样式标签失效，包括动画效果。
+<code>style</code> 为重置后新的样式名称。</p>
+<h3 id="t-%e6%b8%90%e5%8f%98"><code>t</code> (渐变)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-28">格式</h4>
+<pre><code class="language-ts"><div>t(t1?: Time, t2?: Time, accel?: Accel, style_modifiers: <span class="hljs-built_in">string</span>)
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-28">说明</h4>
+<p>从一个样式动画<strong>渐变</strong>到另外一个。可以使用 <code>t</code> 动画化的特效标签如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>形状</th>
+<th>其他效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fs</code></td>
+<td><code>fscx</code></td>
+<td><code>bord</code></td>
+</tr>
+<tr>
+<td><code>fsp</code></td>
+<td><code>fscy</code></td>
+<td><code>xbord</code></td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td><code>frx</code></td>
+<td><code>ybord</code></td>
+</tr>
+<tr>
+<td><code>1c</code></td>
+<td><code>fry</code></td>
+<td><code>shad</code></td>
+</tr>
+<tr>
+<td><code>2c</code></td>
+<td><code>frz</code></td>
+<td><code>xshad</code></td>
+</tr>
+<tr>
+<td><code>3c</code></td>
+<td><code>fr</code></td>
+<td><code>yshad</code></td>
+</tr>
+<tr>
+<td><code>4c</code></td>
+<td><code>fax</code></td>
+<td><code>clip</code></td>
+</tr>
+<tr>
+<td><code>alpha</code></td>
+<td><code>fay</code></td>
+<td><code>iclip</code></td>
+</tr>
+<tr>
+<td><code>1a</code></td>
+<td></td>
+<td><code>be</code></td>
+</tr>
+<tr>
+<td><code>2a</code></td>
+<td></td>
+<td><code>blur</code></td>
+</tr>
+<tr>
+<td><code>3a</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>4a</code></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>对于 <code>clip</code> 和 <code>iclip</code> 标签来说，只有方形的形式能够动画化。矢量绘图的形式无法动画化。</p>
+</blockquote>
+<blockquote>
+<p>在 <code>t</code> 标签中混合使用 <code>clip</code> 和 <code>iclip</code> 标签很难得到好看的效果。</p>
+</blockquote>
+<p><code>Accel</code> 可以指定动画的速度，<code>1</code> 为匀速，<code>&lt;1</code> 为减速，<code>&gt;1</code> 为加速。具体函数：<code>y = x with x ∈ [0;1] = (t - t1)/(t2 - t1)</code></p>
+<p>指定时间后的变化过程如下所示：</p>
+<pre><code><div>样式名       old       old-&gt;new       new
+时间轴    |-------|----------------|-------&gt; 时间(t)
+时间点    0      _t1              _t2
+</div></code></pre>
+<h2 id="%e7%bb%98%e7%94%bb%e6%a0%87%e7%ad%be">绘画标签</h2>
+<h3 id="p-%e7%bb%98%e5%88%b6%e6%a8%a1%e5%bc%8f%e5%88%86%e8%be%a8%e7%8e%87%e5%80%8d%e6%95%b0"><code>p</code> (绘制模式/分辨率倍数)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-29">格式</h4>
+<pre><code class="language-ts"><div>p(enable: <span class="hljs-built_in">boolean</span>)
+p(scale: int &gt; <span class="hljs-number">1</span>)
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-29">说明</h4>
+<p>进入/退出绘制模式；设置分辨率倍数。放大倍数会被设置成 <code>2 ^ (scale - 1)</code>。
+（此处相当于放大画布，到预览时缩小。）</p>
+<h3 id="pbo-%e5%9f%ba%e7%ba%bf%e5%81%8f%e7%a7%bb"><code>pbo</code> (基线偏移)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-30">格式</h4>
+<pre><code class="language-ts"><div>pbo(amount: int)
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-30">说明</h4>
+<p>决定绘制时的<strong>基线偏移</strong>，偏移发生在 <code>Y</code> 方向。
+注意原点是左上角，因此正值会使绘制位置偏下。</p>
+<h2 id="%e7%bb%98%e7%94%bb%e6%8c%87%e4%bb%a4">绘画指令</h2>
+<p>绘画指令需要出现在 <code>clip</code> 标签中，或夹在 <code>p</code> <code>p0</code> 之间的特效标签区外部。</p>
+<p>绘图指令使用<strong>主要填充颜色</strong>来填充图形，用<strong>边框颜色</strong>来填充边框。绘制出的图形也<strong>有阴影</strong>。</p>
+<p>绘图指令之间用空格分割，因此下文的格式说明也没有括号。</p>
+<p>绘图的思路是这样的：想象在视频画面上有一个<strong>光标</strong>。当它<strong>移动</strong>时，它就沿途<em>绘制</em>了曲线；当<strong>闭合</strong>一个形状时，这个闭合图形就会被<em>着色</em>。</p>
+<h3 id="m-%e9%97%ad%e5%90%88%e7%a7%bb%e5%8a%a8%e5%85%89%e6%a0%87"><code>m</code> (闭合移动光标)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-31">格式</h4>
+<pre><code class="language-ts"><div>m x:int y:int
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-31">说明</h4>
+<p>移动光标到 <code>(x, y)</code>。会自动闭合图形，因为程序认为你这是要去从头开始画一个新的独立的图形。。所有的绘图指令都要从这个命令开始。</p>
+<h3 id="n-%e9%9d%9e%e9%97%ad%e5%90%88%e7%a7%bb%e5%8a%a8%e5%85%89%e6%a0%87"><code>n</code> (非闭合移动光标)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-32">格式</h4>
+<pre><code class="language-ts"><div>n x:int y:int
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-32">说明</h4>
+<p>移动光标到 <code>(x, y)</code>，但是不闭合当前的图形。</p>
+<h3 id="line-%e7%9b%b4%e7%ba%bf"><code>Line</code> (直线)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-33">格式</h4>
+<p><code>x:int y:int</code></p>
+<h4 id="%e8%af%b4%e6%98%8e-33">说明</h4>
+<p>从当前光标位置到 <code>(x, y)</code> 画一条直线，同时把光标也移动过去。</p>
+<h3 id="b-%e4%b8%89%e9%98%b6%e8%b4%9d%e5%a1%9e%e5%b0%94%e6%9b%b2%e7%ba%bf"><code>b</code> (三阶贝塞尔曲线)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-34">格式</h4>
+<pre><code class="language-ts"><div>b x1:int y1:int x2:int y2:int x3:int y3:int
+</div></code></pre>
+<h4 id="%e8%af%b4%e6%98%8e-34">说明</h4>
+<p>画一个三阶贝塞尔曲线，起点是当前光标位置，终点是 <code>(x3, y3)</code>，控制点是 <code>(x1, y1)</code> 和 <code>(x2, y2)</code>。</p>
+<h3 id="s-%e4%b8%89%e6%ac%a1-b-%e7%ba%bf%e6%9d%a1"><code>s</code> (三次 B 线条)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-35">格式</h4>
+<p><code>s x1:int y1:int x2:int y2:int x3:int y3:int ... xN:int yN:int</code></p>
+<p>画一个到 <code>N</code> 点的三次B线条。它最少要包含三个坐标点（这种情况下和 b 相同）。这基本上是把几个贝塞尔曲线连接到一起。</p>
+<h4 id="%e8%af%b4%e6%98%8e-35">说明</h4>
+<h3 id="p-%e6%89%a9%e5%b1%95-b-%e7%ba%bf%e6%9d%a1"><code>p</code> (扩展 B 线条)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-36">格式</h4>
+<p><code>p x:int y:int</code></p>
+<h4 id="%e8%af%b4%e6%98%8e-36">说明</h4>
+<p>把B线条扩展到 <code>(x, y)</code>，这本质上相当于给 <code>s</code> 追加一个坐标点。</p>
+<h3 id="c-%e9%97%ad%e5%90%88-b-%e7%ba%bf%e6%9d%a1"><code>c</code> (闭合 B 线条)</h3>
+<h4 id="%e6%a0%bc%e5%bc%8f-37">格式</h4>
+<p><code>c</code></p>
+<h4 id="%e8%af%b4%e6%98%8e-37">说明</h4>
+<p>闭合 B 线条。</p>
+
+    </body>
+    </html>
